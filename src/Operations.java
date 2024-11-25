@@ -1,36 +1,30 @@
 import java.util.Scanner;
 
 public class Operations {
-    public static void AccountOperations(Scanner sc, int AccountType) {
+    public static void AccountOperations(Scanner sc) {
 
 
-        //USERNAME AND PASSWORD
+        //USERNAME
         final String uLog = "johndoe";
-        final String uPin = "1234";
 
         //CHOICES
 
-        int eChoice;
         int aChoice;
-        int fchoice;
-        int rchoice;
+        int lChoice;
 
-
-        //SAVINGS
+        //SAVINGS & CURRENT
 
         final double sMin = 1000;
         final double wLimit = 20000;
         final double interest = 0.30;
-        double iDeposit = 0;
+        double iDeposit = 0.0;
         double tbalance;
-
-        //CURRENT
-
-        final int cMin = 5000;
 
 
         //BALANCE OPERATIONS
         double Balance = sMin + iDeposit;
+        double dAmount;
+        double dAmount2 = 0;
 
 
 
@@ -40,62 +34,12 @@ public class Operations {
         aChoice = sc.nextInt();
 
 
-        switch (AccountType) {
+        switch (aChoice) {
             case 1:
 
                 //SAVINGS
-                if (aChoice == 1) {
-                    System.out.println("Welcome, " + " " + uLog + "This is your savings account");
-                    System.out.println("1. Check Balance");
-                    System.out.println("2. Deposit Money");
-                    System.out.println("3. Withdraw Money");
-                    System.out.println("4. Calculate Interest(Savings Only)");
-                    System.out.println("5. Logout");
 
-                    System.out.println("Enter your choice: ");
-                    int lChoice = sc.nextInt();
-                    if (lChoice == 1) {
-                        System.out.println("Your available balance is: " + Balance);
-                        return;
-                    } else if (lChoice == 2) {
-                        System.out.println("Enter amount to deposit: ");
-                        double dAmount;
-                        if (!sc.hasNextDouble()) {
-                            System.out.println("You can only deposit money amounts!");
-                            return;
-                        } else {
-                            dAmount = sc.nextDouble();
-                        }
-                        tbalance = dAmount + Balance;
-                        System.out.println("Your balance is now: " + tbalance);
-                        return;
-                    } else if (lChoice == 3) {
-                        System.out.println("Enter amount to withdraw: ");
-                        double dWithAmount = 0.0;
-                        if (!sc.hasNextDouble()) {
-                            System.out.println("You can only withdraw money amounts!");
-                        } else {
-                            dWithAmount = sc.nextDouble();
-                        }
-                        tbalance = Balance - dWithAmount;
-                        System.out.println("Your balance is now: " + tbalance);
-                        return;
-                    } else if (lChoice == 4) {
-                        double tInterest = Balance * interest * 1;
-                        System.out.println("Your total interest is: " + tInterest);
-                        return;
-                    } else if (lChoice == 5) {
-                        System.out.println("Logout Successful! ");
-                        return;
-                    }
-                }
-                break;
-
-                case 2:
-
-                //CURRENT
-
-                System.out.println("Welcome, " + " " + uLog + "This is your current account");
+                System.out.println("Welcome, " + " " + uLog + " " + "This is your Savings account");
                 System.out.println("1. Check Balance");
                 System.out.println("2. Deposit Money");
                 System.out.println("3. Withdraw Money");
@@ -103,44 +47,106 @@ public class Operations {
                 System.out.println("5. Logout");
 
                 System.out.println("Enter your choice: ");
-                int lChoice = sc.nextInt();
-                if (lChoice == 1) {
-                    System.out.println("Your available balance is: " + Balance);
-                    return;
-                } else if (lChoice == 2) {
-                    System.out.println("Enter amount to deposit: ");
-                    double dAmount;
-                    if (!sc.hasNextDouble()) {
-                        System.out.println("You can only deposit money amounts!");
-                        return;
-                    } else {
-                        dAmount = sc.nextDouble();
-                    }
-                    tbalance = dAmount + Balance;
-                    System.out.println("Your balance is now: " + tbalance);
-                    return;
-                } else if (lChoice == 3) {
-                    System.out.println("Enter amount to withdraw: ");
-                    double dWithAmount = 0.0;
-                    if (!sc.hasNextDouble()) {
-                        System.out.println("You can only withdraw money amounts!");
-                    } else {
-                        dWithAmount = sc.nextDouble();
-                    }
-                    tbalance = Balance - dWithAmount;
-                    System.out.println("Your balance is now: " + tbalance);
-                    return;
-                } else if (lChoice == 4) {
-                    System.out.println("Only available in Savings Account! ");
-                    return;
-                } else if (lChoice == 5) {
-                    System.out.println("Logout Successful! ");
-                    return;
-                } else {
-                    System.out.println("Invalid choice!");
-                    return;
+                lChoice = sc.nextInt();
+
+                switch (lChoice) {
+                    case 1:
+                        System.out.println("Your Balance is " + Balance);
+                        break;
+
+                    case 2:
+                        System.out.println("Enter amount to deposit: ");
+
+                        if (!sc.hasNextInt()) {
+                            System.out.println("Invalid input!");
+                            return;
+                        } else {
+                            dAmount = sc.nextDouble();
+                            tbalance = Balance + dAmount;
+                            System.out.println("Your Balance total is " + tbalance);
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Enter amount to withdraw: ");
+                        if (!sc.hasNextInt()) {
+                            System.out.println("Invalid input!");
+                        } else if (dAmount2 > wLimit) {
+                            System.out.println("Maximum Withdraw Limit is 20,000");
+                        } else {
+                            dAmount2 = sc.nextDouble();
+                            tbalance = Balance - dAmount2;
+                            System.out.println("Your Balance total is " + tbalance);
+                        }
+                        break;
+                    case 4:
+                        double tInterest = Balance * interest * 1;
+                        System.out.println("Your Interest is " + tInterest);
+                        break;
+                    case 5:
+                        System.out.println("Logout Successful! ");
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                        break;
+
                 }
 
+            case 2:
+
+                //CURRENT
+
+                System.out.println("Welcome, " + " " + uLog + " " + "This is your Current account");
+                System.out.println("1. Check Balance");
+                System.out.println("2. Deposit Money");
+                System.out.println("3. Withdraw Money");
+                System.out.println("4. Calculate Interest(Savings Only)");
+                System.out.println("5. Logout");
+
+                System.out.println("Enter your choice: ");
+                lChoice = sc.nextInt();
+
+                switch (lChoice) {
+                    case 1:
+                        System.out.println("Your Balance is " + Balance);
+                        break;
+                    case 2:
+                        if (!sc.hasNextInt()) {
+                            System.out.println("Invalid input!");
+                            return;
+                        } else {
+                            dAmount = sc.nextDouble();
+                            tbalance = Balance + dAmount;
+                            System.out.println("Your Balance total is " + tbalance);
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Enter amount to withdraw: ");
+                        if (!sc.hasNextInt()) {
+                            System.out.println("Invalid input!");
+                        } else if (dAmount2 > wLimit) {
+                            System.out.println("Maximum Withdraw Limit is 20,000");
+                        } else {
+                            dAmount2 = sc.nextDouble();
+                            tbalance = Balance - dAmount2;
+                            System.out.println("Your Balance total is " + tbalance);
+                        }
+                        break;
+                    case 4:
+                        System.out.println("Only Available in savings account! ");
+                        break;
+                    case 5:
+                        System.out.println("Logout Successful! ");
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                        break;
+                }
+                break;
+                default:
+                    System.out.println("Invalid choice");
         }
+
+
     }
 }

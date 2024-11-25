@@ -25,7 +25,7 @@ public class LoginService {
 
                 attempts++;
                 System.out.println("Incorrect Credentials. " + "You have "+ (maxAttempts - attempts) + " attempts left.");
-                continue;
+
             }
         }
 

@@ -10,23 +10,17 @@ public class Registration {
 
         //CHOICES
         int aChoice;
-        int fchoice;
         int rchoice;
 
 
         //SAVINGS
         final double sMin = 1000;
-        final double wLimit = 20000;
-        final double interest = 0.30;
-        double iDeposit = 0;
-        double tbalance;
+        double iDeposit;
+
 
         //CURRENT
         final int cMin = 5000;
 
-
-        //BALANCE OPERATIONS
-        double Balance = sMin + iDeposit;
 
         //loops
         boolean regpin = true;
@@ -34,25 +28,26 @@ public class Registration {
 
         //REGISTRATION
 
-        while (u_name == true) {
+        while (u_name) {
             sc.nextLine();
             System.out.println("Enter a username: ");
             name = sc.nextLine();
             if (name.length() > 20) {
                 System.out.println("you can only enter a maximum of 20 characters!");
-                continue;
+            } else {
+                break;
             }
-            break;
         }
 
-        while (regpin == true) {
+        while (regpin) {
             System.out.println("Enter a 4-digit pin: ");
             Pin = sc.nextLine();
             if (Pin.length() != 4) {
                 System.out.println("Error! Please enter a 4-digit pin!");
-                continue;
+
+            } else {
+                break;
             }
-            break;
         }
 
 
@@ -82,7 +77,7 @@ public class Registration {
 
                     if (LoginService.login(sc, "johndoe", "1234")) {
 
-                        Operations.AccountOperations(sc, aChoice);
+                        Operations.AccountOperations(sc);
 
                     } else {
 
@@ -126,7 +121,7 @@ public class Registration {
                     //LOGIN CODE IF USER CHOOSES TO LOG IN AFTER REGISTRATION
 
                     if (LoginService.login(sc, "johndoe", "1234")) {
-                        Operations.AccountOperations(sc, aChoice);
+                        Operations.AccountOperations(sc);
                     } else {
                         System.out.println("Login Failed!");
                     }
